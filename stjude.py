@@ -21,8 +21,10 @@ processed_coordinates_list = [','.join(coord.split(', ')) for coord in coordinat
 neighbor_lst = []
 
 for latlng in processed_coordinates_list:
+    # Use Google GeoCoding API for reverse geocoding
     url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlng+'&key='+API_KEY
 
+    # Find the name of neighborhood from the JSON file returned by HTTP Request
     neighbor_name = requests.get(url).json()['results'][0]['address_components'][2]['long_name']
     neighbor_lst.append(neighbor_name)
 
